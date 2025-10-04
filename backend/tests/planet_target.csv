@@ -1,0 +1,2 @@
+pl_name,default_flag,sy_snum,sy_pnum,pl_orbper,pl_rade,pl_tranmid,ttv_flag,pl_trandep,pl_trandur,st_teff,st_rad,st_mass,ra,dec,sy_pmra,sy_pmdec,sy_dist,sy_plx,sy_bmag,sy_kmag,sy_umag,sy_w1mag,sy_w2mag,sy_w3mag,sy_w4mag,sy_gaiamag,sy_kepmag,target
+aaa,0,1,1,2.204735,1.31,2454957.12345,0,0.0204,1.5,5627,1.06,1.03,19.1234,-45.6789,-5.67,10.23,100.0,10.5,9.8,9.5,9.3,9.1,9.0,10.2,12.3,12,23,1

@@ -1,19 +1,17 @@
-from fastapi import APIRouter, HTTPException
-from app.schemas.exoplanet import ExoplanetFeatures, ExoplanetPrediction
+from fastapi import APIRouter, UploadFile, File, HTTPException
+import pandas as pd
 from app.models.model_handler import ExoplanetModel
 
 router = APIRouter(prefix="/exoplanet", tags=["Exoplanet AI"])
-
 model = ExoplanetModel()
 
-@router.get("/health")
-def health_check():
-    return {"status": "ok", "message": "Backend running smoothly 🚀"}
-
-@router.post("/predict", response_model=ExoplanetPrediction)
-def predict_exoplanet(data: ExoplanetFeatures):
+@router.post("/predict")
+async def predict_exoplanets(file: UploadFile = File(...)):
     try:
-        result = model.predict(data.dict())
+        df = pd.read_csv(file.file)
+
+        result = model.predict_csv(df)
+        
         return result
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Prediction error: {e}")

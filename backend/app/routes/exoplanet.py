@@ -4,9 +4,15 @@ from app.models.model_handler import ExoplanetModel
 from app.data.data import KEPLER_EXPECTED_COLUMNS, KEPLER_STRING_COLUMNS, KEPLER_NUMERIC_COLUMNS, K2_EXPECTED_COLUMNS, K2_STRING_COLUMNS, K2_NUMERIC_COLUMNS
 
 router = APIRouter(prefix="/exoplanet", tags=["Exoplanet AI"])
-model = ExoplanetModel()
-model2 = ExoplanetModel()
+model_kepler = ExoplanetModel(
+    model_path="kepler_model\\kepler_stacking_classifier.pkl",
+    scaler_path="kepler_model\\kepler_scaler.pkl"
+)
 
+model_k2 = ExoplanetModel(
+    model_path="k2_model\\k2_stacking_classifier.pkl",
+    scaler_path="k2_model\\k2_scaler.pkl"
+)
 
 
 @router.post("/predict")
@@ -35,12 +41,6 @@ async def predict_exoplanets(file: UploadFile = File(...), model: str = "..."):
                     status_code=400,
                     detail="CSV contains missing (NaN) values. Please clean the data."
                 )
-            for col in string_cols:
-                if not pd.api.types.is_string_dtype(df[col]):
-                    raise HTTPException(
-                        status_code=400,
-                        detail=f"Column '{col}' must contain string/text values."
-                    )
             for col in numeric_cols:
                 if not pd.api.types.is_numeric_dtype(df[col]):
                     raise HTTPException(
@@ -80,10 +80,15 @@ async def predict_exoplanets(file: UploadFile = File(...), model: str = "..."):
                         status_code=400,
                         detail=f"Column '{col}' must contain only numeric values (int/float)."
                     )
-        #crear atributo predict_csv antes de descomentar
-        #result = model.predict_csv(df)
-        #return result
-        return "valido"
+
+        if model == "kepler":
+            result = model_kepler.predict_csv(df, id_col="kepid")
+        elif model == "k2":
+            result = model_k2.predict_csv(df, id_col="pl_name")
+        else:
+            raise HTTPException(status_code=400, detail="Model must be 'kepler' or 'k2'.")
+
+        return result
 
     except pd.errors.EmptyDataError:
         raise HTTPException(status_code=400, detail="Uploaded CSV is empty or invalid format.")

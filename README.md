@@ -8,6 +8,8 @@ In this project, we aim to bring accessibility to the experience of participatin
 This is the backend service for **ExoAI**, an AI-powered system designed to automatically classify exoplanets using open-source NASA datasets (Kepler, K2, TESS).  
 The backend is built with **FastAPI** and serves endpoints for inference and model management.
 
+# ExoAI Frontend
+
 ## UI Preview
 
 Below are the main UI screens for **ExoAI**, showcasing the user flow from the main page to analysis and results.
@@ -25,13 +27,11 @@ Below are the main UI screens for **ExoAI**, showcasing the user flow from the m
 </p>
 
 The project structure includes:
-- UI/UX link to Figma: https://www.figma.com/design/5MRJwiYg5YPMPGwdCkFyo5/NASA?node-id=0-1&p=f
+- UI/UX ink to Figma: https://www.figma.com/design/5MRJwiYg5YPMPGwdCkFyo5/NASA?node-id=0-1&p=f
 - `/backend` → FastAPI app (this folder)
 - `/frontend` → Next.js web interface (built separately)
 
 ---
-
-# ExoAI Frontend
 
 ## Tech Stack
 - **NextJS** develop
@@ -41,12 +41,95 @@ The project structure includes:
 
 ## Navigation
 
-The user navigates through the main page, etc NEEDS COMPLETION
-boton1->boton11
-      ->boton12
+### Exoplanet AI Backend – Input Feature Reference
 
-boton2->boton21
-      ->boton22
+#### K2 Model Required Columns
+
+| Column | Description |
+|--------|---------|
+| pl_name | Exoplanet candidate identifier |
+| sy_snum | Number of stars in the system |
+| pl_orbper | Orbital period (days) |
+| pl_rade | Planet radius (Earth radii) |
+| pl_tranmid | Mid-transit time |
+| ttv_flag | Transit Timing Variations flag |
+| pl_trandep | Transit depth |
+| pl_trandur | Transit duration |
+| st_teff | Stellar effective temperature (K) |
+| st_rad | Stellar radius (solar radii) |
+| st_mass | Stellar mass (solar masses) |
+| ra | Right Ascension |
+| dec | Declination |
+| sy_pmra | Proper motion in RA |
+| sy_pmdec | Proper motion in Dec |
+| sy_dist | Distance to system (pc) |
+| sy_plx | Parallax (mas) |
+| sy_bmag | B-band magnitude |
+| sy_kmag | K-band magnitude |
+| sy_umag | U-band magnitude |
+| sy_w1mag | WISE W1 magnitude |
+| sy_w2mag | WISE W2 magnitude |
+| sy_w3mag | WISE W3 magnitude |
+| sy_w4mag | WISE W4 magnitude |
+| sy_gaiamag | Gaia magnitude |
+| sy_kepmag | Kepler magnitude |
+
+#### Kepler Model Required Columns
+
+| Parameter | Description |
+|-----------|-------------|
+| kepid | Kepler ID: unique identifier for each target star |
+| koi_score | Kepler Object of Interest (KOI) score (vetting score) |
+| koi_fpflag_nt | Not Transit-like false positive flag (1 = true positive, 0 = false positive) |
+| koi_fpflag_ss | Stellar eclipsing binary false positive flag |
+| koi_fpflag_co | Contaminated false positive flag |
+| koi_fpflag_ec | Eclipsing binary false positive flag |
+| koi_period | Orbital period of the candidate planet (days) |
+| koi_period_err1 | Positive error on the orbital period |
+| koi_period_err2 | Negative error on the orbital period |
+| koi_time0bk | Transit epoch (BKJD, Barycentric Kepler Julian Date) |
+| koi_time0bk_err1 | Positive error on transit epoch |
+| koi_time0bk_err2 | Negative error on transit epoch |
+| koi_eccen | Orbital eccentricity |
+| koi_impact | Transit impact parameter |
+| koi_impact_err1 | Positive error on impact parameter |
+| koi_impact_err2 | Negative error on impact parameter |
+| koi_duration | Transit duration (hours) |
+| koi_duration_err1 | Positive error on duration |
+| koi_duration_err2 | Negative error on duration |
+| koi_depth | Transit depth (ppm) |
+| koi_depth_err1 | Positive error on depth |
+| koi_depth_err2 | Negative error on depth |
+| koi_prad | Planet radius (Earth radii) |
+| koi_prad_err1 | Positive error on planet radius |
+| koi_prad_err2 | Negative error on planet radius |
+| koi_teq | Equilibrium temperature of the planet (K) |
+| koi_insol | Insolation flux received by the planet (Earth flux units) |
+| koi_insol_err1 | Positive error on insolation |
+| koi_insol_err2 | Negative error on insolation |
+| koi_max_sngle_ev | Maximum single event statistic (MES) |
+| koi_max_mult_ev | Maximum multiple event statistic (MES) |
+| koi_model_snr | Model signal-to-noise ratio |
+| koi_count | Number of transits observed |
+| koi_num_transits | Number of observed transits |
+| koi_tce_plnt_num | Planet number in Threshold Crossing Event (TCE) |
+| koi_steff | Stellar effective temperature (K) |
+| koi_steff_err1 | Positive error on stellar effective temperature |
+| koi_steff_err2 | Negative error on stellar effective temperature |
+| koi_smet | Stellar metallicity [Fe/H] |
+| koi_smet_err1 | Positive error on stellar metallicity |
+| koi_smet_err2 | Negative error on stellar metallicity |
+| koi_srad | Stellar radius (solar radii) |
+| koi_srad_err1 | Positive error on stellar radius |
+| koi_srad_err2 | Negative error on stellar radius |
+| koi_smass | Stellar mass (solar masses) |
+| koi_smass_err1 | Positive error on stellar mass |
+| koi_smass_err2 | Negative error on stellar mass |
+| ra | Right Ascension (degrees) |
+| dec | Declination (degrees) |
+| koi_kepmag | Kepler magnitude |
+| koi_kmag | K-band magnitude |
+
 
 ---
 
@@ -127,21 +210,84 @@ For more information, enter: http://localhost:8000/docs
 ## Project Structure
 
 ```
-backend/
-│
-├── app/
-│   ├── main.py                 # FastAPI entry point
-│   ├── routes/                 # API endpoints
-│   ├── models/                 # Model loading & inference logic
-│   ├── schemas/                # Pydantic models for validation
-│   └── utils/                  # Optional helpers (preprocessing, etc.)
-│
-├── models/
-│   └── exoplanet_model.pkl     # Trained ML model (placeholder)
-│
-├── requirements.txt
-└── run.sh
+├── backend                                 # FastAPI backend, handles model training, prediction, and metrics
+│ ├── app
+│ │ ├── init.py
+│ │ ├── main.py
+│ │ ├── data
+│ │ │ └── data.py
+│ │ ├── models
+│ │ │ ├── init.py
+│ │ │ ├── model_handler.py
+│ │ │ ├── k2_model
+│ │ │ │ ├── K2_dataset.csv
+│ │ │ │ ├── k2_scaler.pkl
+│ │ │ │ ├── k2_stacking_classifier.pkl
+│ │ │ │ ├── K2_train_data.csv
+│ │ │ │ ├── train_k2_model.ipynb
+│ │ │ │ └── train_k2_model.py
+│ │ │ └── kepler_model
+│ │ │ ├── Kepler_dataset.csv
+│ │ │ ├── kepler_scaler.pkl
+│ │ │ ├── kepler_stacking_classifier.pkl
+│ │ │ ├── Kepler_train_data.csv
+│ │ │ ├── train_kepler_model.ipynb
+│ │ │ └── train_kepler_model.py
+│ │ ├── routes
+│ │ │ ├── init.py
+│ │ │ └── exoplanet.py
+│ │ └── schemas
+│ │ ├── init.py
+│ │ └── exoplanet.py
+│ └── pycache/
+├── tests                                      # Test datasets and unit tests for backend endpoints
+│ ├── planet_target.csv
+│ ├── planet.csv
+│ ├── test_k2_model.csv
+│ ├── test_kepler_model.csv
+│ └── test_predict.py
+├── frontend                                   # React/Next.js frontend for user interface and interaction
+│ ├── app
+│ │ ├── analysis
+│ │ │ ├── loading.tsx
+│ │ │ └── page.tsx
+│ │ ├── globals.css
+│ │ ├── layout.tsx
+│ │ └── page.tsx
+│ ├── components
+│ │ └── ui
+│ │ └── theme-provider.tsx
+│ ├── hooks
+│ │ ├── use-mobile.ts
+│ │ └── use-toast.ts
+│ ├── lib
+│ │ └── utils.ts
+│ ├── public
+│ │ ├── placeholder-logo.png
+│ │ ├── placeholder-logo.svg
+│ │ ├── placeholder-user.jpg
+│ │ ├── placeholder.jpg
+│ │ ├── placeholder.svg
+│ │ └── planet.jpg
+│ └── styles
+│ └── globals.css
+├── UIUX                                      # Screenshots and design mockups of the interface
+│ ├── analytics_page.jpeg
+│ ├── main_page.jpeg
+│ └── metrics_page.jpeg
+├── .gitignore                                # Git ignore rules
+├── README.md                                 # Project documentation
+└── requirements.txt                          # Python dependencies for backend
+├── frontend/.gitignore
+├── frontend/components.json
+├── frontend/next.config.mjs
+├── frontend/package-lock.json
+├── frontend/package.json
+├── frontend/pnpm-lock.yaml
+├── frontend/postcss.config.mjs
+└── frontend/tsconfig.json
 ```
+
 
 ---
 
@@ -200,7 +346,7 @@ pip install -r requirements.txt
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
- 
+
 ### 4 Start frontend
 ```bash
 npm install
@@ -224,7 +370,7 @@ The process to build an efficient method to compute exoplanets probabilities fro
 
 ## Selecting and filtering the data
 
-We decided to take NASA data and resources provided by the project in:
+We took NASA data and resources provided by the project in:
 [A World Away: Hunting for Exoplanets with AI](https://www.spaceappschallenge.org/2025/challenges/a-world-away-hunting-for-exoplanets-with-ai/?tab=resources)
 
 In particular, the Kepler Objects of Interest, the TESS Objects of Interest and the K2 Planets and Candidates.

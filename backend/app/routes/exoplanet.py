@@ -174,6 +174,32 @@ async def ingest_exoplanets(file: UploadFile = File(...), model: str = "..."):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
     
+
+
+
+# Training
+from app.models.train_k2_model import train_k2_model
+
+@app.post("/train/k2")
+async def train_k2():
+    metrics, model_path, scaler_path = train_k2_model(
+        dataset_path="app/models/k2_model/K2_dataset.csv",
+        output_dir="app/models/k2_model"
+    )
+    return metrics
+
+from app.models.train_kepler_model import train_kepler_model
+
+@app.post("/train/kepler")
+async def train_kepler():
+    metrics, model_path, scaler_path = train_kepler_model(
+        dataset_path="app/models/kepler_model/Kepler_dataset.csv",
+        output_dir="app/models/kepler_model"
+    )
+    return metrics
+
+
+    
 @router.get("/metrics")
 async def get_metrics():
     try:

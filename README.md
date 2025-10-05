@@ -1,4 +1,4 @@
-# ExoAI PROJECT
+# Exo-AI PROJECT
 
 **Project:** ExoAI: AI Exoplanet Classification  
 **Team:** Marc Nebot, Miquel Cortijo, Sheyla Castro, Víctor-Xavier Bigorra, Daniel Muñoz 

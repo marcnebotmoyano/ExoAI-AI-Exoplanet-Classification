@@ -1,6 +1,5 @@
 
 KEPLER_EXPECTED_COLUMNS = ["kepid",
-    "koi_pdisposition",
     "koi_score",
     "koi_fpflag_nt",
     "koi_fpflag_ss",
@@ -58,9 +57,7 @@ KEPLER_NUMERIC_COLUMNS = [col for col in KEPLER_EXPECTED_COLUMNS if col not in K
 
 
 K2_EXPECTED_COLUMNS = ["pl_name",
-    "default_flag",
     "sy_snum",
-    "sy_pnum",
     "pl_orbper",
     "pl_rade",
     "pl_tranmid",

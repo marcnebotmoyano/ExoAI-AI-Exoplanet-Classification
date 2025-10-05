@@ -178,7 +178,7 @@ async def ingest_exoplanets(file: UploadFile = File(...), model: str = "..."):
 
 
 app = FastAPI()
-from app.models.train_kepler_model import train_kepler_model
+#from app.models.train_kepler_model import train_kepler_model
 
 @app.post("/train/kepler")
 async def train_kepler():
@@ -187,7 +187,7 @@ async def train_kepler():
         output_dir="app/models/kepler_model"
     )
     return metrics
-from app.models.train_kepler_model import train_kepler_model
+#from app.models.train_kepler_model import train_kepler_model
 
 @app.post("/train/kepler")
 async def train_kepler():

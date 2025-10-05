@@ -8,6 +8,22 @@ In this project, we aim to bring accessibility to the experience of participatin
 This is the backend service for **ExoAI**, an AI-powered system designed to automatically classify exoplanets using open-source NASA datasets (Kepler, K2, TESS).  
 The backend is built with **FastAPI** and serves endpoints for inference and model management.
 
+## UI Preview
+
+Below are the main UI screens for **ExoAI**, showcasing the user flow from the main page to analysis and results.
+
+<p align="center">
+  <img src="UIUX/main_page.jpeg" alt="Main Page" width="600"/>
+</p>
+
+<p align="center">
+  <img src="UIUX/analysis_page.jpeg" alt="Analysis Page" width="600"/>
+</p>
+
+<p align="center">
+  <img src="UIUX/metrics_page.jpeg" alt="Metrics Page" width="600"/>
+</p>
+
 The project structure includes:
 - `/backend` → FastAPI app (this folder)
 - `/frontend` → Next.js web interface (built separately)

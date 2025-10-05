@@ -1,18 +1,18 @@
 # Exo-AI PROJECT
 
-**Project:** ExoAI: AI Exoplanet Classification  
+**Project:** Exo-AI: AI Exoplanet Classification  
 **Team:** Marc Nebot, Miquel Cortijo, Sheyla Castro, Víctor-Xavier Bigorra, Daniel Muñoz 
 
 ## Summary
 In this project, we aim to bring accessibility to the experience of participating in the discovery of new exoplanets with a user friendly interface, designed for an easy understanding of the data management in this field.
-This is the backend service for **ExoAI**, an AI-powered system designed to automatically classify exoplanets using open-source NASA datasets (Kepler, K2, TESS).  
+This is the backend service for **Exo-AI**, an AI-powered system designed to automatically classify exoplanets using open-source NASA datasets (Kepler, K2, TESS).  
 The backend is built with **FastAPI** and serves endpoints for inference and model management.
 
-# ExoAI Frontend
+# Exo-AI Frontend
 
 ## UI Preview
 
-Below are the main UI screens for **ExoAI**, showcasing the user flow from the main page to analysis and results.
+Below are the main UI screens for **Exo-AI**, showcasing the user flow from the main page to analysis and results.
 
 <p align="center">
   <img src="UIUX/main_page.jpeg" alt="Main Page" width="600"/>
@@ -133,7 +133,7 @@ The project structure includes:
 
 ---
 
-# ExoAI Backend
+# Exo-AI Backend
 
 ## API Documentation
 
@@ -361,7 +361,7 @@ npm run dev
 
 ---
 
-**ExoAI Backend** — built during a 48h Hackathon  
+**Exo-AI Backend** — built during a 48h Hackathon  
 “Exploring the universe, one exoplanet at a time.”
 
 # Data methodology and physical reasoning

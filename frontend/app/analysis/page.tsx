@@ -176,8 +176,8 @@ export default function AnalysisPage() {
           <a href="/analysis" className="text-sm tracking-wider border-b-2 border-blue-500 pb-1">
             ANALYSIS
           </a>
-          <a href="#" className="text-sm tracking-wider text-gray-400 hover:text-white transition-colors">
-            ACCURACY
+          <a href="/metrics" className="text-sm tracking-wider text-gray-400 hover:text-white transition-colors">
+            METRICS
           </a>
         </nav>
       </header>
@@ -401,23 +401,23 @@ export default function AnalysisPage() {
             <div className="space-y-4">
               <div className="flex gap-3">
                 <span className="text-2xl font-bold text-black">1</span>
-                <span className="text-sm text-gray-700">Orbital period</span>
+                <span className="text-sm text-gray-700">Aparent magnitude along different bands</span>
               </div>
               <div className="flex gap-3">
                 <span className="text-2xl font-bold text-black">2</span>
-                <span className="text-sm text-gray-700">Transit depth and duration</span>
+                <span className="text-sm text-gray-700">Transit depth, duration and position</span>
               </div>
               <div className="flex gap-3">
                 <span className="text-2xl font-bold text-black">3</span>
-                <span className="text-sm text-gray-700">Planetary radius and mass</span>
+                <span className="text-sm text-gray-700">Planet radius and orbital period</span>
               </div>
               <div className="flex gap-3">
                 <span className="text-2xl font-bold text-black">4</span>
-                <span className="text-sm text-gray-700">Flux variations and light curve morphology</span>
+                <span className="text-sm text-gray-700">Star and interstellar parameters</span>
               </div>
               <div className="flex gap-3">
                 <span className="text-2xl font-bold text-black">5</span>
-                <span className="text-sm text-gray-700">Signal-to-noise ratio (SNR)</span>
+                <span className="text-sm text-gray-700">Distance and position in the celestial vault</span>
               </div>
             </div>
             <button className="mt-6 text-sm text-blue-600 hover:underline">Learn more</button>

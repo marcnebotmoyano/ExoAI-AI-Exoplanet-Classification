@@ -92,13 +92,13 @@ export default function ExoAIPage() {
       <header className="flex items-center justify-between px-8 py-6">
         <h1 className="text-3xl font-bold tracking-wide">EXO-AI</h1>
         <nav className="flex gap-16">
-          <a href="#" className="text-sm tracking-wider border-b-2 border-blue-500 pb-1">
+          <a href="/" className="text-sm tracking-wider border-b-2 border-blue-500 pb-1">
             UPLOAD
           </a>
-          <a href="#" className="text-sm tracking-wider text-gray-400 hover:text-white transition-colors">
+          <a href="/analysis" className="text-sm tracking-wider text-gray-400 hover:text-white transition-colors">
             ANALYSIS
           </a>
-          <a href="#" className="text-sm tracking-wider text-gray-400 hover:text-white transition-colors">
+          <a href="/metrics" className="text-sm tracking-wider text-gray-400 hover:text-white transition-colors">
             METRICS
           </a>
         </nav>
@@ -239,7 +239,7 @@ export default function ExoAIPage() {
             disabled={!selectedFile || isUploading}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-base rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isUploading ? "Analyzing..." : "Analize"}
+            {isUploading ? "Analyzing..." : "Analyze"}
           </Button>
         </div>
       </div>

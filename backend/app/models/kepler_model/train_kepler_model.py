@@ -84,3 +84,9 @@ def train_kepler_model(dataset_path="Kepler_dataset.csv", output_dir=".", target
 
     return metrics, model_path, scaler_path
 
+
+if __name__ == "__main__":
+    metrics, model_path, scaler_path = train_kepler_model()
+    print("Training completed. Metrics:")
+    print(metrics)
+

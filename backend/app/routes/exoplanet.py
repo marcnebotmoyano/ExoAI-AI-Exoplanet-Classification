@@ -173,3 +173,10 @@ async def ingest_exoplanets(file: UploadFile = File(...), model: str = "..."):
         raise HTTPException(status_code=400, detail="Uploaded CSV is empty or invalid format.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
+    
+@router.get("/metrics")
+async def get_metrics():
+    try:
+        return [model_k2.get_metrics(), model_kepler.get_metrics()]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting metrics: {e}")

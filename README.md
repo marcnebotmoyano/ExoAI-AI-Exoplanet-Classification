@@ -35,6 +35,56 @@ boton2->boton21
 
 # ExoAI Backend
 
+API Documentation
+/exoplanet/predict
+
+Method: POST
+Description: Predicts whether each entry in an uploaded dataset is an exoplanet or not.
+
+Request Parameters:
+model (string, required, query parameter): either "kepler" or "k2"
+file (UploadFile .csv, required, form-data): CSV file containing the input data for prediction
+
+CSV Requirements:
+Must include all required feature columns for the selected model (excluding the target column)
+Must not contain any missing (NaN) values
+
+Successful Response Example:
+[
+  { "id": "K00075.01", "prediction": "CONFIRMED" },
+  { "id": "K00123.04", "prediction": "FALSE POSITIVE" }
+]
+
+Error Response Example (Validation Failed):
+{
+  "detail": "Missing required columns: radius, mass"
+}
+
+/exoplanet/ingest
+
+Method: POST
+Description: Validates a dataset and optionally retrains the selected machine learning model.
+
+Request Parameters:
+model (string, required, query parameter): "kepler" or "k2"
+file (UploadFile .csv, required, form-data): New dataset to validate or retrain
+
+Behavior:
+Validates CSV columns and data types
+If valid, retrains the selected model using internal training dataset (K2_dataset.csv or Kepler_dataset.csv)
+Saves the updated .pkl model and scaler
+
+Success Response Example:
+{
+  "status": "success",
+  "model": "k2"
+}
+
+Failure Response Example:
+{
+  "status": "failed"
+}
+
 ## Tech Stack
 
 - **FastAPI** for the web server  

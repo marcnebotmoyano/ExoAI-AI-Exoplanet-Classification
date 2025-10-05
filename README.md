@@ -70,30 +70,37 @@ backend/
 - The functions in this program filter the data recieved from the csv archives so it is ready to be used by the model and begin the process.
 
 
-## Model Training
+---
 
-When you receive the dataset (e.g., Kepler or TESS data), you can train a simple Random Forest model using scikit-learn.
+## Model Training Workflow
 
-Example training script (`train_model.py`):
+1. **Data Preprocessing**
+   - Load CSV files into pandas DataFrames.
+   - Separate target (`target`) from features.
+   - Drop unnecessary columns (e.g., `pl_name`, IDs).
+   - Split into training and test sets (`train_test_split`) with stratification.
+   - Scale features using `StandardScaler`.
 
-```python
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-import joblib
+2. **Base Classifiers**
+   - Random Forest (`RandomForestClassifier`)  
+   - XGBoost (`XGBClassifier`)  
 
-df = pd.read_csv("data/exoplanet_data.csv")
-features = ["orbital_period", "transit_duration", "planet_radius", "stellar_radius", "stellar_temp"]
-X = df[features]
-y = df["label"]
+3. **Stacking Ensemble**
+   - Combine the base classifiers using `StackingClassifier`.
+   - Logistic Regression is used as the final estimator.
+   - Train on the scaled training data.
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = RandomForestClassifier(n_estimators=200, random_state=42)
-model.fit(X_train, y_train)
+4. **Evaluation**
+   - Predictions are made on the test set.
+   - All metrics including classification reports, confusion matrices, and accuracies are documented in the training notebooks:
+     - `train_k2_model.ipynb`
+     - `train_kepler_model.ipynb`
 
-joblib.dump(model, "models/exoplanet_model.pkl")
-print("Model saved to models/exoplanet_model.pkl")
-```
+5. **Model Saving**
+   - Models and scalers are saved as `.pkl` files for later use:
+     - `k2_stacking_classifier.pkl` / `k2_scaler.pkl`
+     - `kepler_stacking_classifier.pkl` / `kepler_scaler.pkl`
+   - Feature names and model accuracy are stored internally within the saved models.
 
 ---
 
@@ -102,7 +109,7 @@ print("Model saved to models/exoplanet_model.pkl")
 ### 1 Create virtual environment
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
 ```
 
 ### 2 Install dependencies

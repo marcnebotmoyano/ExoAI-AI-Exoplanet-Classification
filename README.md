@@ -17,7 +17,7 @@ Below are the main UI screens for **ExoAI**, showcasing the user flow from the m
 </p>
 
 <p align="center">
-  <img src="UIUX/analysis_page.jpeg" alt="Analysis Page" width="600"/>
+  <img src="UIUX/analytics_page.jpeg" alt="Analysis Page" width="600"/>
 </p>
 
 <p align="center">

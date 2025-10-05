@@ -35,55 +35,67 @@ boton2->boton21
 
 # ExoAI Backend
 
-API Documentation
-/exoplanet/predict
+## API Documentation
 
-Method: POST
-Description: Predicts whether each entry in an uploaded dataset is an exoplanet or not.
+### `/exoplanet/predict`
 
-Request Parameters:
-model (string, required, query parameter): either "kepler" or "k2"
-file (UploadFile .csv, required, form-data): CSV file containing the input data for prediction
+**Method:** `POST`  
+**Description:** Predicts whether each entry in an uploaded dataset is an exoplanet or not.
 
-CSV Requirements:
-Must include all required feature columns for the selected model (excluding the target column)
-Must not contain any missing (NaN) values
+### Request Parameters
+- **model** (`string`, required, query parameter): either `"kepler"` or `"k2"`  
+- **file** (`UploadFile .csv`, required, form-data): CSV file containing the input data for prediction
 
-Successful Response Example:
+### CSV Requirements
+- Must include all required feature columns for the selected model (excluding the target column)  
+- Must not contain any missing (`NaN`) values
+
+### Successful Response Example
+```json
 [
   { "id": "K00075.01", "prediction": "CONFIRMED" },
   { "id": "K00123.04", "prediction": "FALSE POSITIVE" }
 ]
+```
 
-Error Response Example (Validation Failed):
+### Error Response Example (Validation Failed)
+```json
 {
   "detail": "Missing required columns: radius, mass"
 }
+```
 
-/exoplanet/ingest
+---
 
-Method: POST
-Description: Validates a dataset and optionally retrains the selected machine learning model.
+## `/exoplanet/ingest`
 
-Request Parameters:
-model (string, required, query parameter): "kepler" or "k2"
-file (UploadFile .csv, required, form-data): New dataset to validate or retrain
+**Method:** `POST`  
+**Description:** Validates a dataset and optionally retrains the selected machine learning model.
 
-Behavior:
-Validates CSV columns and data types
-If valid, retrains the selected model using internal training dataset (K2_dataset.csv or Kepler_dataset.csv)
-Saves the updated .pkl model and scaler
+### Request Parameters
+- **model** (`string`, required, query parameter): `"kepler"` or `"k2"`  
+- **file** (`UploadFile .csv`, required, form-data): New dataset to validate or retrain
 
-Success Response Example:
+### Behavior
+- Validates CSV columns and data types  
+- If valid, retrains the selected model using internal training dataset (`K2_dataset.csv` or `Kepler_dataset.csv`)  
+- Saves the updated `.pkl` model and scaler
+
+### Success Response Example
+```json
 {
   "status": "success",
   "model": "k2"
 }
+```
 
-Failure Response Example:
+### Failure Response Example
+```json
 {
   "status": "failed"
 }
+```
+For more information, enter: http://localhost:8000/docs 
 
 ## Tech Stack
 
@@ -167,16 +179,16 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3 Start FastAPI server
-```bash
-bash run.sh
-```
-Or manually:
+### 3 Start backend
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
----
+### 4 Start frontend
+```bash
+npm install
+npm run dev
+```
 
 ## API Endpoints
 

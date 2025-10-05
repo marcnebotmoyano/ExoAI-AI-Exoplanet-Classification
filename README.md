@@ -27,7 +27,7 @@ Below are the main UI screens for **Exo-AI**, showcasing the user flow from the 
 </p>
 
 The project structure includes:
-- UI/UX ink to Figma: https://www.figma.com/design/5MRJwiYg5YPMPGwdCkFyo5/NASA?node-id=0-1&p=f
+- UI/UX link to Figma: https://www.figma.com/design/5MRJwiYg5YPMPGwdCkFyo5/NASA?node-id=0-1&p=f
 - `/backend` → FastAPI app (this folder)
 - `/frontend` → Next.js web interface (built separately)
 

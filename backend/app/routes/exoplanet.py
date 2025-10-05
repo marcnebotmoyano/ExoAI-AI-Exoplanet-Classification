@@ -3,6 +3,10 @@ import pandas as pd
 from app.models.model_handler import ExoplanetModel
 from app.data.data import KEPLER_EXPECTED_COLUMNS, KEPLER_STRING_COLUMNS, KEPLER_NUMERIC_COLUMNS, K2_EXPECTED_COLUMNS, K2_STRING_COLUMNS, K2_NUMERIC_COLUMNS
 
+
+from app.models.k2_model.train_k2_model import train_k2_model
+from app.models.kepler_model.train_kepler_model import train_kepler_model
+
 router = APIRouter(prefix="/exoplanet", tags=["Exoplanet AI"])
 model_kepler = ExoplanetModel(
     model_path="kepler_model\\kepler_stacking_classifier.pkl",
@@ -96,8 +100,6 @@ async def predict_exoplanets(file: UploadFile = File(...), model: str = "..."):
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
 
 
-app = FastAPI()
-
 @router.post("/ingest")
 async def ingest_exoplanets(file: UploadFile = File(...), model: str = "..."):
     try:
@@ -164,49 +166,32 @@ async def ingest_exoplanets(file: UploadFile = File(...), model: str = "..."):
                         detail=f"Column '{col}' must contain only numeric values (int/float)."
                     )
 
-        #cambiar por funcion de ingest
-        #crear atributo train_csv antes de descomentar
-        #result = model.train_csv(df)
-        #return result
-        return "valido"
+        try:
+            if model == "kepler":
+                metrics, model_path, scaler_path = train_kepler_model(
+                    dataset_path="app/models/kepler_model/Kepler_dataset.csv",
+                    output_dir="app/models/kepler_model"
+                )
+            elif model == "k2":
+                metrics, model_path, scaler_path = train_k2_model(
+                    dataset_path="app/models/k2_model/K2_dataset.csv",
+                    output_dir="app/models/k2_model"
+                )
+            else:
+                raise HTTPException(status_code=400, detail="Model must be 'kepler' or 'k2'.")
 
+            return {
+                "status": "success",
+            }
+
+        except Exception as e:
+            return {
+                "status": "failed",
+            }
     except pd.errors.EmptyDataError:
         raise HTTPException(status_code=400, detail="Uploaded CSV is empty or invalid format.")
-    
-
-from app.models.train_k2_model import train_k2_model
-from app.models.train_kepler_model import train_kepler_model
 
 
-@router.post("/train")
-async def train_exoplanet_model(model: str):
-    try:
-        if model == "kepler":
-            metrics, model_path, scaler_path = train_kepler_model(
-                dataset_path="app/models/kepler_model/Kepler_dataset.csv",
-                output_dir="app/models/kepler_model"
-            )
-        elif model == "k2":
-            metrics, model_path, scaler_path = train_k2_model(
-                dataset_path="app/models/k2_model/K2_dataset.csv",
-                output_dir="app/models/k2_model"
-            )
-        else:
-            raise HTTPException(status_code=400, detail="Model must be 'kepler' or 'k2'.")
-
-        return {
-            "status": "success",
-            "model": model,
-            "metrics": metrics,
-            "model_path": model_path,
-            "scaler_path": scaler_path
-        }
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Training error: {e}")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
-    
 
 
     

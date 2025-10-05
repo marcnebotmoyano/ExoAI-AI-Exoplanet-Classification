@@ -1,12 +1,10 @@
-# ExoAI Backend 🚀
+# ExoAI PROJECT
 
 **Project:** ExoAI: AI Exoplanet Classification  
-**Team:** Marc Nebot, Miquel Cortijo, Sheyla Castro, Víctor-Xavier Bigorra, Daniel Muñoz  
+**Team:** Marc Nebot, Miquel Cortijo, Sheyla Castro, Víctor-Xavier Bigorra, Daniel Muñoz 
 
----
-
-## 🧠 Overview
-
+## Summary
+In this project, we aim to bring accessibility to the experience of participating in the discovery of new exoplanets with a user friendly interface, designed for an easy understanding of the data management in this field.
 This is the backend service for **ExoAI**, an AI-powered system designed to automatically classify exoplanets using open-source NASA datasets (Kepler, K2, TESS).  
 The backend is built with **FastAPI** and serves endpoints for inference and model management.
 
@@ -16,7 +14,28 @@ The project structure includes:
 
 ---
 
-## ⚙️ Tech Stack
+# ExoAI Frontend
+
+## Tech Stack
+- **NextJS** develop
+- **Figma** UI/UX
+
+---
+
+## Navigation
+
+The user navigates through the main page, etc NEEDS COMPLETION
+boton1->boton11
+      ->boton12
+
+boton2->boton21
+      ->boton22
+
+---
+
+# ExoAI Backend
+
+## Tech Stack
 
 - **FastAPI** for the web server  
 - **Uvicorn** as ASGI server  
@@ -26,7 +45,7 @@ The project structure includes:
 
 ---
 
-## 🧩 Project Structure
+## Project Structure
 
 ```
 backend/
@@ -47,7 +66,11 @@ backend/
 
 ---
 
-## 🧠 Model Training
+## Data
+- The functions in this program filter the data recieved from the csv archives so it is ready to be used by the model and begin the process.
+
+
+## Model Training
 
 When you receive the dataset (e.g., Kepler or TESS data), you can train a simple Random Forest model using scikit-learn.
 
@@ -69,25 +92,25 @@ model = RandomForestClassifier(n_estimators=200, random_state=42)
 model.fit(X_train, y_train)
 
 joblib.dump(model, "models/exoplanet_model.pkl")
-print("✅ Model saved to models/exoplanet_model.pkl")
+print("Model saved to models/exoplanet_model.pkl")
 ```
 
 ---
 
-## 🚀 Run Locally
+## Run Locally
 
-### 1️⃣ Create virtual environment
+### 1 Create virtual environment
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-### 2️⃣ Install dependencies
+### 2 Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Start FastAPI server
+### 3 Start FastAPI server
 ```bash
 bash run.sh
 ```
@@ -98,7 +121,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ---
 
-## 🧪 API Endpoints
+## API Endpoints
 
 ### **GET** `/`
 > Health check endpoint. Returns API welcome message.
@@ -130,14 +153,14 @@ Response example:
 
 ---
 
-## 🌌 Notes
+## Notes
 - The backend is fully compatible with **Next.js** frontend (via CORS).  
-- Make sure `models/exoplanet_model.pkl` exists before starting the server.  
+- Make sure `models/k2_model/k2_stacking_classifier.pkl` & `models/kepler_model/kepler_stacking_classifier.pkl` exist before starting the server.  
 - You can replace or retrain the model easily by updating the `.pkl` file.
 
 ---
 
-**ExoAI Backend** — built during a 48h Hackathon 🪐  
+**ExoAI Backend** — built during a 48h Hackathon  
 “Exploring the universe, one exoplanet at a time.”
 
 # Data methodology and physical reasoning

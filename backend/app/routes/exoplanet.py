@@ -159,8 +159,8 @@ async def ingest_exoplanets(file: UploadFile = File(...), model: str = "..."):
                     )
 
         #cambiar por funcion de ingest
-        #crear atributo predict_csv antes de descomentar
-        #result = model.predict_csv(df)
+        #crear atributo train_csv antes de descomentar
+        #result = model.train_csv(df)
         #return result
         return "valido"
 

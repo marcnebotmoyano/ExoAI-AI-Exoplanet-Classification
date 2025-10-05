@@ -96,6 +96,7 @@ async def predict_exoplanets(file: UploadFile = File(...), model: str = "..."):
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
 
 
+app = FastAPI()
 
 @router.post("/ingest")
 async def ingest_exoplanets(file: UploadFile = File(...), model: str = "..."):

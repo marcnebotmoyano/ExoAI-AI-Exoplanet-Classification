@@ -206,37 +206,6 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 npm install
 npm run dev
 ```
-
-## API Endpoints
-
-### **GET** `/`
-> Health check endpoint. Returns API welcome message.
-
-### **GET** `/exoplanet/health`
-> Verifies backend status.
-
-### **POST** `/exoplanet/predict`
-> Run inference using the trained model.  
-> Request body example:
-
-```json
-{
-  "orbital_period": 365.2,
-  "transit_duration": 2.3,
-  "planet_radius": 1.1,
-  "stellar_radius": 0.9,
-  "stellar_temp": 5800
-}
-```
-
-Response example:
-```json
-{
-  "prediction": "confirmed",
-  "probability": [0.8, 0.15, 0.05]
-}
-```
-
 ---
 
 ## Notes
